@@ -8,6 +8,7 @@ import tweepy
 import nltk
 # nltk.download('punkt')
 from textblob import TextBlob
+import pandas as pd
 
 dotenv.load_dotenv()
 
@@ -29,11 +30,20 @@ noOfTweet = 20
 tweets = api.search(q=["vercel"], lang="en", count=noOfTweet)
 
 test_list = []
+tweets_list = []
 
 for tweet in tweets:
+    tweets_list.append(str(tweet.text))
     test_list.append(TextBlob(str(tweet.text)).sentiment)
 
-print(test_list)
+# print(test_list)
+
+frame = {"Tweet": tweets_list, "Sentiment": test_list}
+
+df = pd.DataFrame(data=frame) # takes an object
+
+print(df)
+
 
 # words = "Hello there! how are ya"
 
