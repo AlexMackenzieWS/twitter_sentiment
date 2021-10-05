@@ -27,18 +27,20 @@ api = tweepy.API(auth)
 
 noOfTweet = 20
 
-tweets = api.search(q=["vercel"], lang="en", count=noOfTweet)
+tweets = api.search(q=["vercel serverless"], lang="en", count=noOfTweet)
 
-test_list = []
+sentiment_list = []
+subjectivity_list = []
 tweets_list = []
 
 for tweet in tweets:
     tweets_list.append(str(tweet.text))
-    test_list.append(TextBlob(str(tweet.text)).sentiment)
+    sentiment_list.append(TextBlob(str(tweet.text)).sentiment.polarity)
+    subjectivity_list.append(TextBlob(str(tweet.text)).sentiment.subjectivity)
 
 # print(test_list)
 
-frame = {"Tweet": tweets_list, "Sentiment": test_list}
+frame = {"Tweet": tweets_list, "Sentiment": sentiment_list, "Subjectivity": subjectivity_list}
 
 df = pd.DataFrame(data=frame) # takes an object
 
