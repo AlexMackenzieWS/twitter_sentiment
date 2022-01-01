@@ -27,6 +27,8 @@ api = tweepy.API(auth)
 
 noOfTweet = 20
 
+# example query below
+
 tweets = api.search(q=["vercel serverless"], lang="en", count=noOfTweet)
 
 sentiment_list = []
@@ -38,8 +40,6 @@ for tweet in tweets:
     sentiment_list.append(TextBlob(str(tweet.text)).sentiment.polarity)
     subjectivity_list.append(TextBlob(str(tweet.text)).sentiment.subjectivity)
 
-# print(test_list)
-
 frame = {"Tweet": tweets_list, "Sentiment": sentiment_list, "Subjectivity": subjectivity_list}
 
 df = pd.DataFrame(data=frame) # takes an object
@@ -47,11 +47,7 @@ df = pd.DataFrame(data=frame) # takes an object
 print(df)
 
 
-# words = "Hello there! how are ya"
 
-# test = TextBlob(words)
-
-# print(test.tags)
 
 
 
